@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id='container'></div>
+
+<script src="../js/p5.js"></script>
+<script>
+    let _t = document.querySelector('#container')
+    let _w = _t.offsetWidth
+    let _h = _t.offsetHeight
+    let redImg, greenImg, blueImg;
+
+    let paused = true;
+    function mouseClicked() {
+        paused = !paused;
+        if (paused)
+            noLoop();
+        else
+            loop();
+    }
+    function setup() {
+        createCanvas(_w, _h)
+//        redImg = createChannel('rgba(203, 36, 49, 0.2)');
+//        greenImg = createChannel('rgba(2, 255, 2, 0.3)');
+//        blueImg = createChannel('rgba(9, 122, 251, 0.4)');
+        redImg = createChannel(0xff, 0x00, 0x00);
+        greenImg = createChannel(0x00, 0xff, 0x00);
+        blueImg = createChannel(0x00, 0x00, 0xff);
+        strokeWeight(20);
+        ellipse(56, 46, 55, 55);
+    }
+    function draw() {
+        var x0 = 0.5 * width;
+        var y0 = 0.5 * height;
+        var dmouseX = mouseX - pmouseX;
+        var dmouseY = mouseY - pmouseY;
+        background(0xff);
+        drawChannel(redImg, x0 - dmouseX, y0 - dmouseY);
+        drawChannel(greenImg, x0, y0);
+        drawChannel(blueImg, x0 + dmouseX, y0 + dmouseY);
+    }
+    function drawChannel(img, x, y) {
+        var u = img.width;
+        var v = img.height;
+        blend(img, 0, 0, u, v, x - 0.5 * u, y - 0.5 * v, u, v, DIFFERENCE);
+    }
+//    function createChannel(rgba) {
+    function createChannel(r,g,b) {
+        let pg = new p5.Graphics(200, 200, P2D, this);
+//        pg.background(255);
+//        pg.background(0x00);
+        pg.stroke(r, g, b);
+        pg.strokeWeight(20);
+        pg.noFill();
+        pg.ellipse(0.5 * pg.width, 0.5 * pg.height, pg.width - 22, pg.height - 22);
+        return pg;
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="../../js/p5.js"></script>
+<script>
+    function setup() {
+        createCanvas(600, 600)
+    }
+
+    function draw() {
+        arc(50, 55, 50, 50, 0, HALF_PI);
+        noFill();
+        fill(255)
+        arc(50, 55, 60, 60, HALF_PI, PI);
+        arc(50, 55, 70, 70, PI, PI+QUARTER_PI);
+        arc(50, 55, 80, 80, PI+QUARTER_PI, TWO_PI);
+
+        arc(120, 120, 80, 80, 0, PI+QUARTER_PI);
+
+        arc(50, 50, 80, 80, 0, PI+QUARTER_PI, OPEN);
+    }
+</script>
+</body>
+</html>
